@@ -1,68 +1,47 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.MainPage;
-import pages.ForWhomScooterPage;
+
+
 
 @RunWith(Parameterized.class)
-public class OrderTests {
+public class OrderTests extends BaseTest {
+
     private final String firstName;
     private final String lastName;
     private final String address;
     private final String phoneNumber;
     private final String deliveryDate;
+    private final String rentalPeriod;
+    private final String color;
     private final String comment;
 
-    private WebDriver driver;
-    private MainPage mainPage;
-    private ForWhomScooterPage forWhomScooterPage;
-
-
-    public static final String SCOOTER_URL = "https://qa-scooter.praktikum-services.ru/"; //Адрес главной страницы "Яндекс Самоката"
 
     //Конструктор
-    public OrderTests(String firstName, String lastName, String address, String phoneNumber, String deliveryDate, String comment) {
+    public OrderTests(String firstName, String lastName, String address, String phoneNumber,
+                      String deliveryDate, String rentalPeriod, String color, String comment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.deliveryDate = deliveryDate;
+        this.rentalPeriod = rentalPeriod;
+        this.color = color;
         this.comment = comment;
     }
 
     @Parameterized.Parameters
     public static Object[][] getOrderData() {
         return new Object[][]{
-                {"Настя", "Попова", "Сиэтл", "79991112233", "05.07.1999", "With the lights out!"},
-                {"Дима", "Алешин", "Вашингтон", "79994445566", "31.12.2022", "Привет, меня зовут Крист!"},
-                {"Мария", "Воронина", "Лос-Анджелес", "79998833766", "01.01.2024", "FooFighters"},
+                {"Настя", "Попова", "Сиэтл", "79991112233", "05.07.2025", "сутки", "black", "Звоните после 14 часов"},
+                {"Дима", "Алешин", "Вашингтон", "79994445566", "31.12.2025", "двое суток", "grey", "Акуна-Матата!"},
+                {"Мария", "Воронина", "Лос-Анджелес", "79998833766", "01.01.2026", "трое суток", "black", "Не звонить, только смс"},
         };
     }
 
-    @Before
-    public void setUp() {
-//хром
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
 
-//либо Firefox
-
-         //WebDriverManager.firefoxdriver().setup();
-         //driver = new FirefoxDriver();
-
-        mainPage = new MainPage(driver);
-        forWhomScooterPage = new ForWhomScooterPage(driver);
-
-
-        driver.get(SCOOTER_URL);
-        driver.manage().window().maximize();  //Расширение экрана
-        mainPage.clickCookieButton();
-    }
 
     @Test
     public void testFullOrderByFirstButton() {
@@ -72,12 +51,24 @@ public class OrderTests {
         forWhomScooterPage.nextButtonClick(); //Клик на кнопку "Далее"
 
 
+
+        // Заполнение формы "Про аренду"
+        aboutRentPage.fillOrderForm2(deliveryDate, comment);
+
+        // Клик на кнопку "Заказать"
+        aboutRentPage.clickOrderButton();
+
+        //  ПРОВЕРКА - появилось ли окно подтверждения
+        Assert.assertTrue("Окно подтверждения не появилось",
+                aboutRentPage.isConfirmationModalDisplayed());
+
+        //  Клик на кнопку "Да" в окне подтверждения
+        aboutRentPage.clickConfirmYesButton();
+
+        // ПРОВЕРКА - появилось ли сообщение об успешном заказе
+        Assert.assertTrue("Сообщение об успешном заказе не появилось",
+                aboutRentPage.isSuccessMessageDisplayed());
     }
 
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+
 }

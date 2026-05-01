@@ -1,24 +1,16 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.MainPage;
-
 import static org.junit.Assert.assertEquals;
 
 //Выпадающий список в разделе «Вопросы о важном».
 @RunWith(Parameterized.class)
-public class QuestionsTests {
+public class QuestionsTests extends BaseTest{
 
     private int index;
     private String expected;
-    private WebDriver driver;
-    private MainPage mainPage;
-    public static final String SCOOTER_URL = "https://qa-scooter.praktikum-services.ru/"; //Адрес главной страницы "Яндекс Самоката"
+
 
     //Конструктор класса
     public QuestionsTests(String expected, int index) {
@@ -40,35 +32,14 @@ public class QuestionsTests {
         };
     }
 
-    @Before
-    public void setUp() {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(); // Хром
-
-
-        mainPage = new MainPage(driver);
-        driver.get(SCOOTER_URL);
-        driver.manage().window().maximize();  //Расширение экрана
-        mainPage.clickCookieButton(); //Клик на куки
-
-        mainPage.scrollToTable();
-    }
 
     @Test
     public void testAccordionDropdown() {
         mainPage.clickClosedDropdownByIndex(index);  //Клик по кнопке списка
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-        }
+
         assertEquals(expected, mainPage.getTextFromTextInputByIndex(index)); //Проверка выпадающего текста
     }
 
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+
 }

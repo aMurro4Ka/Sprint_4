@@ -1,6 +1,6 @@
 package pages;
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,9 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 //Класс страницы "Для кого самокат"
 public class ForWhomScooterPage {
     private WebDriver driver;
+    private WebDriverWait wait;
     // Конструктор
     public ForWhomScooterPage(WebDriver driver) {
+
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 10);
     }
 
 
@@ -43,10 +46,21 @@ public class ForWhomScooterPage {
     }
 
 
-    public void  setMetro() {
-        driver.findElement(metroStationField).click();
-        driver.findElement(metroStation).click();
-            }
+    public void setMetro() {
+        // Кликаем на поле ввода станции метро
+        WebElement metroInput = wait.until(ExpectedConditions.elementToBeClickable(metroStationField));
+        metroInput.click();
+
+        // Вводим название станции
+        metroInput.sendKeys("Черкизовская");
+
+
+
+        By stationOption = By.xpath("//div[contains(text(), 'Черкизовская')]");
+        wait.until(ExpectedConditions.elementToBeClickable(stationOption)).click();
+
+        System.out.println("Станция метро 'Черкизовская' выбрана");
+    }
 
     public void setPhoneNumber(String phoneNumber) {
         driver.findElement(phoneNumberField).sendKeys(phoneNumber);
@@ -69,10 +83,10 @@ public class ForWhomScooterPage {
     private By forWhomScooterText = By.xpath(".//*[text() = 'Для кого самокат']");
 
     //Проверка, что форма "Для кого самокат" открылась
-    public void assertOrderDoneTextVisible() {
+    public boolean  isOrderDoneTextVisible() {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         WebElement checkStatusTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(forWhomScooterText));
-        Assert.assertTrue("Текст 'Заказ оформлен' не виден", checkStatusTextElement.isDisplayed());
+        return checkStatusTextElement.isDisplayed();
     }
 
 
