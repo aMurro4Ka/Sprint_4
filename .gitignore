@@ -1,12 +1,9 @@
 # Default ignored files
 /shelf/
-/.idea/workspace.xml
+/workspace.xml
 .idea/
 .build/
 .target/
 /target/
 target/
 **/target/
-chromedriver.exe
-*.exe
-/drivers/
