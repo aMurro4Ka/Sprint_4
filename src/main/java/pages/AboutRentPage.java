@@ -59,13 +59,11 @@ public class AboutRentPage {
     }
 
     public void clickOrderButton() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/button[2]")));
+                WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//button[text()='Заказать'])[2]")));
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", button);
-
         button.click();
-
     }
 
     public boolean isConfirmationModalDisplayed() {

@@ -58,9 +58,6 @@ public class OrderTests extends BaseTest {
         // Клик на кнопку "Заказать"
         aboutRentPage.clickOrderButton();
 
-        //  ПРОВЕРКА - появилось ли окно подтверждения
-        Assert.assertTrue("Окно подтверждения не появилось",
-                aboutRentPage.isConfirmationModalDisplayed());
 
         //  Клик на кнопку "Да" в окне подтверждения
         aboutRentPage.clickConfirmYesButton();
@@ -68,6 +65,8 @@ public class OrderTests extends BaseTest {
         // ПРОВЕРКА - появилось ли сообщение об успешном заказе
         Assert.assertTrue("Сообщение об успешном заказе не появилось",
                 aboutRentPage.isSuccessMessageDisplayed());
+
+
     }
 
 

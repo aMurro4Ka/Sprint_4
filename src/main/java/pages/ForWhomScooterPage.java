@@ -59,7 +59,7 @@ public class ForWhomScooterPage {
         By stationOption = By.xpath("//div[contains(text(), 'Черкизовская')]");
         wait.until(ExpectedConditions.elementToBeClickable(stationOption)).click();
 
-        System.out.println("Станция метро 'Черкизовская' выбрана");
+
     }
 
     public void setPhoneNumber(String phoneNumber) {

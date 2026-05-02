@@ -8,7 +8,7 @@ public class SecondOrderButtonTest extends BaseTest{
     @Test
     public void SecondOrderButton() {
         mainPage.scrollToOrderDownButtonAndClick(); //Скролл и клик на нижнюю кнопку "Заказать" на главной странице
-        Assert.assertTrue("Текст 'Заказ оформлен' не виден",
+        Assert.assertTrue("Текст 'Для кого самокат' не виден",
                 forWhomScooterPage.isOrderDoneTextVisible()); //Проверяется наличие текста "Для кого самокат"
     }
 
