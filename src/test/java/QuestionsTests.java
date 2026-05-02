@@ -36,7 +36,7 @@ public class QuestionsTests extends BaseTest{
 
     @Test
     public void testAccordionDropdown() {
-        mainPage.clickClosedDropdownByIndex(index);  //Клик по кнопке списка
+        mainPage.clickClosedDropdownByIndex(index);  //Клик по кнопке списка//
 
         assertEquals(expected, mainPage.getTextFromTextInputByIndex(index)); //Проверка выпадающего текста
     }

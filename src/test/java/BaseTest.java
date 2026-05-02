@@ -21,7 +21,7 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
 
-        // Либо Firefox (закомментировано)
+        // Либо Firefox (закомментировано)//
         // WebDriverManager.firefoxdriver().setup();
         // driver = new FirefoxDriver();
 

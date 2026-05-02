@@ -52,7 +52,7 @@ public class OrderTests extends BaseTest {
 
 
 
-        // Заполнение формы "Про аренду"
+        // Заполнение формы "Про аренду"//
         aboutRentPage.fillOrderForm2(deliveryDate, comment);
 
         // Клик на кнопку "Заказать"

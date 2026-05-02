@@ -21,7 +21,7 @@ private WebDriver driver;
         driver.findElement(orderUpButton).click();   // Клик на верхнюю кнопку "Заказать"
     }
     private By orderDownButton = By.xpath("//button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp' or (@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать')]");
-    //Локатор нижней кнопки "Заказать"
+    //Локатор нижней кнопки "Заказать"//
 
     //Скролл и клик на нижнюю кнопку "Заказать"
     public void scrollToOrderDownButtonAndClick() {

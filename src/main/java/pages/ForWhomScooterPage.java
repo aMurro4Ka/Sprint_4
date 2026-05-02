@@ -82,7 +82,7 @@ public class ForWhomScooterPage {
 
     private By forWhomScooterText = By.xpath(".//*[text() = 'Для кого самокат']");
 
-    //Проверка, что форма "Для кого самокат" открылась
+    //Проверка, что форма "Для кого самокат" открылась//
     public boolean  isOrderDoneTextVisible() {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         WebElement checkStatusTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(forWhomScooterText));

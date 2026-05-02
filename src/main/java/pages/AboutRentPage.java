@@ -30,7 +30,7 @@ public class AboutRentPage {
 
 
     public void fillOrderForm2(String deliveryDate, String comment) {
-        //  Заполнение даты
+        //  Заполнение даты//
         WebElement dateField = wait.until(ExpectedConditions.elementToBeClickable(deliveryDateField));
         dateField.click();
         dateField.clear();
